@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@media (max-width: 1024px) {
+  .background {
+    background-size: 120% 120%; /* Slightly bigger for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .background {
+    background-size: 140% 140%; /* Bigger zoom for small tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .background {
+    background-size: 160% 160%; /* Bigger zoom for mobile phones */
+  }
+}
