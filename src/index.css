@@ -17,3 +17,12 @@
     background-size: 160% 160%; /* Bigger zoom for mobile phones */
   }
 }
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
