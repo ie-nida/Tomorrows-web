@@ -140,6 +140,31 @@ const MainContent = ({ isLoading, currentLanguage }) => {
           }
         ]
       },
+      skinning: {
+        title: "Skinning in osu!taiko",
+        content: "Skinning allows players to customize the visual appearance of osu!taiko to their preferences. Players can modify various elements of the game interface, note appearance, animations, and sound effects.",
+        elements: {
+          title: "Customizable Elements",
+          items: [
+            { name: "Don/Kat Notes", description: "Change the appearance of red and blue notes" },
+            { name: "Hit Explosions", description: "Custom animations when hitting notes" },
+            { name: "Judgment Line", description: "Modify the appearance of the center line" },
+            { name: "Hit Sounds", description: "Replace the default drum sounds with custom sounds" },
+            { name: "Background", description: "Customize the playfield background" },
+            { name: "Drum Animation", description: "Change how the taiko drum looks and animates" }
+          ]
+        },
+        howTo: {
+          title: "How to Apply Skins",
+          steps: [
+            "Download a skin or create your own",
+            "Place skin files in the 'Skins' folder in your osu! directory",
+            "Select the skin in Options > Skin",
+            "Enable skin's sound effects in Options > Audio"
+          ]
+        },
+        community: "The osu! community is known for creating and sharing a wide variety of creative skins. Many players enjoy modifying existing skins or creating their own to match their personal aesthetic preferences or to improve gameplay visibility."
+      },
       mapping: {
         title: "osu!taiko Mapping",
         content: "Creating beatmaps for osu!taiko involves placing notes to match the rhythm and feel of the music. Mappers need to consider various aspects such as note density, patterns, and the overall flow of the map to create an enjoyable gameplay experience."
@@ -296,6 +321,54 @@ const MainContent = ({ isLoading, currentLanguage }) => {
               </div>
             </section>
             
+            {/* Skinning */}
+            <section className="mb-8">
+              <h2 id="skinning" className="text-2xl font-bold mb-4 text-pink-400">{content.skinning.title}</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">{content.skinning.content}</p>
+
+              <div className="bg-[#2a2a2a] p-4 rounded-md mb-6">
+                <h3 className="text-yellow-400 font-medium mb-3">{content.skinning.elements.title}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {content.skinning.elements.items.map((item, index) => (
+                    <div key={index} className="flex flex-col">
+                      <span className="text-pink-400 font-medium">{item.name}</span>
+                      <span className="text-gray-300 text-sm">{item.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-[#2a2a2a] p-4 rounded-md mb-6">
+                <h3 className="text-yellow-400 font-medium mb-3">{content.skinning.howTo.title}</h3>
+                <ol className="list-decimal list-inside space-y-2 text-gray-300">
+                  {content.skinning.howTo.steps.map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
+                </ol>
+              </div>
+
+              <p className="text-gray-300 leading-relaxed">{content.skinning.community}</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div className="bg-[#2a2a2a] p-4 rounded-md">
+                  <TaikoImage 
+                    src="./default.jpg" 
+                    alt="Default osu!taiko skin" 
+                    className="rounded-md mb-2"
+                  />
+                  <p className="text-center text-sm text-gray-400">Default skin</p>
+                </div>
+                <div className="bg-[#2a2a2a] p-4 rounded-md">
+                  <TaikoImage 
+                    src="./custom.jpg" 
+                    alt="Custom osu!taiko skin" 
+                    className="rounded-md mb-2"
+                  />
+                  <p className="text-center text-sm text-gray-400">Custom skin example</p>
+                </div>
+              </div>
+            </section>
+
             {/* Mapping */}
             <section className="mb-8">
               <h2 id="mapping" className="text-2xl font-bold mb-4 text-pink-400">{content.mapping.title}</h2>
