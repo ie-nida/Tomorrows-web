@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+
 @media (max-width: 1024px) {
   .background {
     background-size: 120% 120%; /* Slightly bigger for tablets */
@@ -18,6 +28,18 @@
   }
 }
 
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 @keyframes bounceSlow {
   0%, 100% {
     transform: translateY(0);
@@ -26,3 +48,154 @@
     transform: translateY(-7px);
   }
 }
+
+
+/* Glowing text effect for navbar links */
+.glow-nav {
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Permanent glow for text in navbar links */
+.glow-link {
+  text-shadow: 0 0 10px rgba(255, 0, 255, 1), 0 0 20px rgba(255, 0, 255, 1), 0 0 30px rgba(255, 0, 255, 1);
+  transition: text-shadow 0.3s ease;
+}
+
+/* Optional: Underline animation on hover (for a more refined effect) */
+.group-hover\:scale-x-100 {
+  transform: scaleX(1);
+}
+
+
+.cursor-trail {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  background: url('/skins/cursortrail.png') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  animation: trailFade 0.4s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes trailFade {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Animation for content loading */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Link hover effect */
+a:not(.no-underline):hover {
+  text-decoration: underline;
+}
+
+/* Pulse animation for loading indicator */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.loading-pulse {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Rotate animation for notes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+.spin-medium {
+  animation: spin 6s linear infinite;
+}
+
+/* Hover effect for sidebar items */
+.sidebar-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #f97316;
+  transition: width 0.3s ease;
+}
+
+.sidebar-item:hover::after {
+  width: 100%;
+}
+
+/* Language selector animation */
+.language-selector {
+  transition: all 0.3s ease;
+}
+
+.language-selector:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+{
+    "reddit": [
+      {
+        "title": "Mapping Discussion: Meta Trends in 2025",
+        "author": "u/BeatCrafty",
+        "date": "28 Apr 2025",
+        "image": "/images/reddit-meta-discussion.jpg",
+        "link": "https://reddit.com/r/osugame"
+      },
+      {
+        "title": "Skin Showcase: Minimalistic Glow Edition",
+        "author": "u/SkinVault",
+        "date": "26 Apr 2025",
+        "image": "/images/reddit-skin.jpg",
+        "link": "https://reddit.com/r/osugame"
+      },
+      {
+        "title": "Help: Can’t get 3-star maps right—what now?",
+        "author": "u/CircleClicker12",
+        "date": "25 Apr 2025",
+        "image": "/images/reddit-help-thread.jpg",
+        "link": "https://reddit.com/r/osugame"
+      }
+    ],
+    "osu": [
+      {
+        "title": "The Lazer Grand Arena Returns",
+        "author": "LeoFLT",
+        "date": "2 May 2025",
+        "image": "/images/osu-lazer.jpg",
+        "link": "https://osu.ppy.sh/home/news"
+      },
+      {
+        "title": "The Followpoint: Spectator, the osu!catch Mapping Pioneer",
+        "author": "MegaMix & -Isla-",
+        "date": "30 Apr 2025",
+        "image": "/images/osu-spectator.jpg",
+        "link": "https://osu.ppy.sh/home/news"
+      },
+      {
+        "title": "KEL LAN Tournament 3 Recap",
+        "author": "0x84f",
+        "date": "29 Apr 2025",
+        "image": "/images/osu-kel3.jpg",
+        "link": "https://osu.ppy.sh/home/news"
+      }
+    ],
+    "twitter": [
+      {
+        "title": "osu! is live now with ranked updates!",
+        "author": "@osugame",
+        "date": "2 May 2025",
+        "image": "/images/twitter-live.jpg",
+        "link": "https://twitter.com/osugame/status/123456"
+      },
+      {
+        "title": "Behind the Beatmap: Artist Spotlight – 1zm8",
+        "author": "@osugame",
+        "date": "28 Apr 2025",
+        "image": "/images/twitter-artist.jpg",
+        "link": "https://twitter.com/osugame/status/7891011"
+      },
+      {
+        "title": "LAN Events Are Back! KEL3 Recap in 60 seconds!",
+        "author": "@osugame",
+        "date": "29 Apr 2025",
+        "image": "/images/twitter-lan.jpg",
+        "link": "https://twitter.com/osugame/status/456789"
+      }
+    ]
+  }
+  

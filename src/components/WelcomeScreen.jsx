@@ -1,18 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function WelcomeScreen({ onComplete }) {
+function WelcomeScreen() {
+  const navigate = useNavigate(); // Use useNavigate for navigation
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    // Set a timeout to trigger the fade out and navigate after 3 seconds
     const timer = setTimeout(() => {
       setFadeOut(true);
       setTimeout(() => {
-        onComplete();
-      }, 1000); // fade out duration
-    }, 3000); // Welcome stays for 3s
+        navigate("/loading"); // Automatically navigate to the loading page
+      }, 1000); // Fade-out duration
+    }, 3000); // Welcome stays for 3 seconds
+
+    // Cleanup the timeout when the component unmounts
     return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, [navigate]);
 
   return (
     <div className="h-screen w-screen bg-black flex items-center justify-center relative overflow-hidden">
@@ -56,5 +61,4 @@ function WelcomeScreen({ onComplete }) {
 }
 
 export default WelcomeScreen;
-
 
