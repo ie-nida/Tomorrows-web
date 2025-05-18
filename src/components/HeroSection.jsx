@@ -102,7 +102,7 @@ const HeroSection = () => {
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center mt-32">

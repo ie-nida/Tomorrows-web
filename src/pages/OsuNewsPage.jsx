@@ -1,11 +1,33 @@
 import { useState, useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import React from 'react';
+import { useOsuApi } from '../hooks/useOsuApi';
+import NewsCard from './NewsCard';
 
-const TABS = ['Reddit', 'osu! News', 'YouTube'];
+const TABS = ['osu! News','Reddit', 'YouTube'];
 
-const OsuNewsSection = () => {
-  const [activeTab, setActiveTab] = useState('Reddit');
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
+  let lastError;
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response;
+    } catch (error) {
+      lastError = error;
+      if (i < maxRetries - 1) {
+        await wait(Math.pow(2, i) * 1000); // Exponential backoff
+      }
+    }
+  }
+  throw lastError;
+};
+
+const OsuNewsPage = () => {
+  const [activeTab, setActiveTab] = useState('osu! News');
   const [redditPosts, setRedditPosts] = useState([]);
   const [youtubeVideos, setYoutubeVideos] = useState([
     {
@@ -30,37 +52,15 @@ const OsuNewsSection = () => {
       link: 'https://youtu.be/FOb9v4BZ118?si=cBfuJnLsCn7VcFwa',
     },
   ]);
-  const [osuNews] = useState([
-    {
-      title: 'The Lazer Grand Arena Returns',
-      author: 'LeoFLT',
-      date: '2 May 2025',
-      image: '/lazer.jpg',
-      link: 'https://osu.ppy.sh/home/news',
-    },
-    {
-      title: 'The Followpoint: Spectator, the osu!catch Mapping Pioneer',
-      author: 'MegaMix & -Isla-',
-      date: '30 Apr 2025',
-      image: '/spectator.jpg',
-      link: 'https://osu.ppy.sh/home/news',
-    },
-    {
-      title: 'KEL LAN Tournament 3 Recap',
-      author: '0x84f',
-      date: '29 Apr 2025',
-      image: '/KEL.jpg',
-      link: 'https://osu.ppy.sh/home/news',
-    },
-  ]);
+
+  const { osuNews, osuLoading, osuError } = useOsuApi();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Reddit Posts
   useEffect(() => {
     const fetchRedditPosts = async () => {
       try {
-        const response = await fetch('https://www.reddit.com/r/osugame/new.json?limit=3');
+        const response = await fetchWithRetry('https://www.reddit.com/r/osugame/new.json?limit=3');
         const data = await response.json();
         const posts = data.data.children.map((post) => {
           const p = post.data;
@@ -81,7 +81,7 @@ const OsuNewsSection = () => {
         setRedditPosts(posts);
       } catch (err) {
         console.error('Error fetching Reddit posts:', err);
-        setError('Failed to load Reddit posts.');
+        setError('Failed to load Reddit posts. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -92,49 +92,42 @@ const OsuNewsSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const renderPosts = (posts, showDateFormatted = false) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-      {posts.map((post, i) => (
-        <a
-          key={i}
-          href={post.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-2xl p-[2px] bg-gradient-to-r from-pink-800 to-[rgb(113,34,68)] shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-pink-800/50 transition-all duration-300 hover:scale-[1.02]"
-        >
-          <div className="rounded-2xl bg-[#250e29] backdrop-blur-sm border-[#3d3d5c] overflow-hidden flex flex-col group h-full">
-            <div className="w-full h-40 relative overflow-hidden flex items-center justify-center bg-gray-500 text-sm text-gray-400">
-              {post.image ? (
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                />
-              ) : (
-                <div className="text-center text-gray-400">No image</div>
-              )}
-            </div>
-            <div className="p-3 flex flex-col justify-between flex-1">
-              <h3 className="text-lg font-semibold mb-1 text-white">
-                {post.title}
-              </h3>
-              <p className="text-sm text-gray-400 mb-1">by {post.author}</p>
-              <p className="text-xs text-gray-500 mt-auto">
-                {showDateFormatted
-                  ? post.date
-                  : formatDistanceToNow(new Date(post.date), { addSuffix: true })}
-              </p>
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
-  );
+  const renderContent = () => {
+    if (activeTab === 'Reddit') {
+      return (
+        <>
+          {loading && <div className="text-center text-gray-400">Loading posts...</div>}
+          {error && <div className="text-center text-red-500">{error}</div>}
+          {!loading && !error && <NewsGrid posts={redditPosts} />}
+          <ViewMoreButton link="https://reddit.com/r/osugame" text="See more Reddit News" />
+        </>
+      );
+    } else if (activeTab === 'osu! News') {
+      return (
+        <>
+          {osuLoading && <div className="text-center text-gray-400">Loading posts...</div>}
+          {osuError && <div className="text-center text-red-500">{osuError}</div>}
+          {!osuLoading && !osuError && <NewsGrid posts={osuNews} showDateFormatted />}
+          <ViewMoreButton link="https://osu.ppy.sh/home/news" text="See more osu! News" />
+        </>
+      );
+    } else if (activeTab === 'YouTube') {
+      return (
+        <>
+          {loading && <div className="text-center text-gray-400">Loading posts...</div>}
+          {error && <div className="text-center text-red-500">{error}</div>}
+          {!loading && !error && <NewsGrid posts={youtubeVideos} />}
+          <ViewMoreButton link="https://www.youtube.com/@osugame/featured" text="See more YouTube News" />
+        </>
+      );
+    }
+    return null;
+  };
 
   return (
-    <section className="bg-gradient-to-b from-[#360b20] to-[#000000] min-h-screen text-white py-16 px-4">
+    <section className="bg-gradient-to-b from-[#230715] to-[#360b20] min-h-screen text-white py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="-mt-4 inline-block text-5xl font-extrabold bg-gradient-to-r from-[#9a094a] via-[#fbaad1] to-white bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(198,36,110,0.7)]">
+        <h2 className="-mt-10 inline-block text-5xl font-extrabold bg-gradient-to-r from-[#9a094a] via-[#fbaad1] to-white bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(198,36,110,0.7)]">
           Osu! News Hub
         </h2>
         <p
@@ -163,64 +156,36 @@ const OsuNewsSection = () => {
           ))}
         </div>
 
-        {activeTab === 'Reddit' && (
-          <>
-            {loading && <div className="text-center text-gray-400">Loading posts...</div>}
-            {error && <div className="text-center text-red-500">{error}</div>}
-            {!loading && !error && renderPosts(redditPosts)}
-            <div className="mt-8 flex justify-center">
-              <a
-                href="https://reddit.com/r/osugame"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white border-2 border-[#85194a] px-6 py-3 rounded-full bg-[#4b112c] hover:border-pink-900 hover:bg-gradient-to-r from-[#9a094a] via-[#76274c] transition-all"
-              >
-                See more Reddit News
-              </a>
-            </div>
-          </>
-        )}
-
-        {activeTab === 'osu! News' && (
-          <>
-            {loading && <div className="text-center text-gray-400">Loading posts...</div>}
-            {error && <div className="text-center text-red-500">{error}</div>}
-            {!loading && !error && renderPosts(osuNews, true)}
-            <div className="mt-8 flex justify-center">
-              <a
-                href="https://osu.ppy.sh/home/news"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white border-2 border-[#85194a] px-6 py-3 rounded-full bg-[#4b112c] hover:border-pink-900 hover:bg-gradient-to-r from-[#9a094a] via-[#76274c] transition-all"
-              >
-                See more osu! News
-              </a>
-            </div>
-          </>
-        )}
-
-        {activeTab === 'YouTube' && (
-          <>
-            {loading && <div className="text-center text-gray-400">Loading posts...</div>}
-            {error && <div className="text-center text-red-500">{error}</div>}
-            {!loading && !error && renderPosts(youtubeVideos)}
-            <div className="mt-8 flex justify-center">
-              <a
-                href="https://www.youtube.com/@osugame/featured"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white border-2 border-[#85194a] px-6 py-3 rounded-full bg-[#4b112c] hover:border-pink-900 hover:bg-gradient-to-r from-[#9a094a] via-[#76274c] transition-all"
-              >
-                See more YouTube News
-              </a>
-            </div>
-          </>
-        )}
+        {renderContent()}
       </div>
     </section>
   );
 };
 
-export default OsuNewsSection;
+const NewsGrid = ({ posts, showDateFormatted }) => {
+  const formatted = showDateFormatted || false;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      {posts.map((post, i) => (
+        <NewsCard key={i} post={post} showDateFormatted={formatted} />
+      ))}
+    </div>
+  );
+};
+
+const ViewMoreButton = ({ link, text }) => (
+  <div className="mt-8 flex justify-center">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white border-2 border-[#85194a] px-6 py-3 rounded-full bg-[#4b112c] hover:border-pink-900 hover:bg-gradient-to-r from-[#9a094a] via-[#76274c] transition-all"
+    >
+      {text}
+    </a>
+  </div>
+);
+
+export default OsuNewsPage;
 
 

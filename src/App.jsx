@@ -9,6 +9,10 @@ import OsuDailyLeaderboard from "./section/OsuDailyLeaderboard.jsx";
 import DownloadPage from "./pages/DownloadPage";
 import Community from "./components/Community.jsx";
 import Taiko from "./components/Taiko";
+import Standard from "./components/Standard.jsx";
+import Catch from "./components/Catch.jsx";
+import Mania from "./components/Mania.jsx";
+
 
 // Welcome Screen should navigate to LoadingPage after it completes
 function WelcomeScreenWithNavigate() {
@@ -62,8 +66,18 @@ function App() {
         {/* Route for CommunityLivePage */}
         <Route path="/communitylive" element={<Community />} />
 
-        {/* Route for Taiko - Fixed the path to match what's in the GameModesSection links */}
+        {/* Route for Taiko */}
         <Route path="/taiko" element={<Taiko />} />
+
+        {/* Route for Standard */}
+        <Route path="/standard" element={<Standard />} />
+
+        {/* Route for Catch */}
+        <Route path="/catch" element={<Catch />} />
+
+        {/* Route for Mania */}
+        <Route path="/mania" element={<Mania />} />
+
       </Routes>
     </Router>
   );

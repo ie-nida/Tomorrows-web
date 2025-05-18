@@ -71,7 +71,7 @@ const NavBar = () => {
 
         <li className="group relative">
           <Link
-            to="/"  // Using Link to navigate to the Leaderboard page
+            to="/help"  // Using Link to navigate to the Leaderboard page
             className="text-white glow-link font-[Quicksand] transition-all duration-300"
           >
             Help

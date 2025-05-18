@@ -27,7 +27,7 @@ const GameModeCard = ({ icon, name, description, difficulty, color, link }) => {
         className={`mt-4 inline-block px-4 py-2 rounded-md text-sm font-medium text-white 
           ${color.replace('border-', 'bg-')} hover:brightness-110 transition-all`}
       >
-        Play Now
+        Read More
       </Link>
 
       {/* Decorative elements */}
@@ -56,11 +56,11 @@ const GameModesSection = () => {
       link: "/taiko"
     },
     {
-      icon: <BarChart3 size={24} className="text-green-500" />,
+      icon: <BarChart3 size={24} className="text-red-700" />,
       name: "osu! Catch",
       description: "Catch the falling fruits to the rhythm of the music.",
       difficulty: "Easy to Learn",
-      color: "border-green-700",
+      color: "border-red-400",
       link: "/catch"
     },
     {
@@ -74,7 +74,7 @@ const GameModesSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-[#000000] to-[#360b20] text-white min-h-screen w-full px-4 py-16">
+    <section className="bg-gradient-to-b from-[#000000] to-[#230715] text-white min-h-screen w-full px-4 py-16">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="inline-block text-5xl font-extrabold bg-gradient-to-r from-[#9a094a] via-[#fbaad1] to-white bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(198,36,110,0.7)] animate-[pulse_3s_ease-in-out_infinite]">
