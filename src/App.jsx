@@ -12,6 +12,7 @@ import Taiko from "./components/Taiko";
 import Standard from "./components/Standard.jsx";
 import Catch from "./components/Catch.jsx";
 import Mania from "./components/Mania.jsx";
+import Help from "./Help.jsx";
 
 
 // Welcome Screen should navigate to LoadingPage after it completes
@@ -77,6 +78,9 @@ function App() {
 
         {/* Route for Mania */}
         <Route path="/mania" element={<Mania />} />
+
+        {/* Route for Help */}
+        <Route path="/help" element={<Help />} />
 
       </Routes>
     </Router>
