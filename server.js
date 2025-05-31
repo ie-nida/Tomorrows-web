@@ -164,13 +164,11 @@ app.get("/api/auth/logout", (req, res) => {
 });
 
 
-
 const PORT = process.env.PORT || 5000;
-const HOST = '0.0.0.0'; // 🔥 Required by Render
-
-app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
+
 
 
 
