@@ -239,7 +239,7 @@ const FAQSection = ({ subSection }) => {
   ];
 
   return (
-    <div>
+    <div className="bg-gray-700 dark:bg-gray-900">
       {/* Main heading */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 pb-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] ">
         Frequently Asked Questions

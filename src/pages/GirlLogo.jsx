@@ -7,13 +7,14 @@ const GirlLogo = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="absolute bottom-0 right-7 z-20 flex items-end">
+    // Hide on sm and md, show on lg+
+    <div className="hidden md:hidden lg:flex absolute bottom-0 right-7 z-20 items-end">
       {/* Girl Image */}
       <div className="animate-[slideUp_1.5s_ease-out_forwards]" style={{ marginRight: "-50px" }}>
         <img
           src={girlImage}
           alt="osu! Girl"
-          className="w-64 max-w-full drop-shadow-xl select-none sm:w-64 md:w-64 lg:w-70 xl:w-[300px] 2xl:w-[370px]" // Adjust the size for bigger screens only
+          className="w-64 max-w-full drop-shadow-xl select-none sm:w-64 md:w-64 lg:w-70 xl:w-[300px] 2xl:w-[370px]"
           draggable="false"
         />
       </div>
@@ -21,10 +22,10 @@ const GirlLogo = () => {
       {/* osu! Logo with animation */}
       <div className="animate-[slideUp_1.5s_ease-out_forwards]">
         <motion.div
-          className="rounded-full cursor-pointer overflow-hidden sm:w-[170px] sm:h-[170px] md:w-[170px] md:h-[170px] lg:w-[170px] lg:h-[170px] xl:w-[170px] xl:h-[170px] 2xl:w-[240px] 2xl:h-[240px]" // Responsive width and height
+          className="rounded-full cursor-pointer overflow-hidden sm:w-[170px] sm:h-[170px] md:w-[170px] md:h-[170px] lg:w-[170px] lg:h-[170px] xl:w-[170px] xl:h-[170px] 2xl:w-[240px] 2xl:h-[240px]"
           style={{
-            marginBottom: "90px", // Adjust this to move the logo up or down
-            marginLeft: "-50px", // Added margin to move logo left
+            marginBottom: "90px",
+            marginLeft: "-50px",
             backgroundImage: `url(${osuLogo})`,
             backgroundSize: "contain",
             backgroundPosition: "center center",
@@ -53,6 +54,3 @@ const GirlLogo = () => {
 };
 
 export default GirlLogo;
-
-
-

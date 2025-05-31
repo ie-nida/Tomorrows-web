@@ -4,6 +4,7 @@ import DownloadSection from '../components/DownloadSection';
 import GuideSection from '../components/GuideSection';
 import VideoGuide from '../components/VideoGuide';
 import SupportSection from '../components/SupportSection';
+import Footer from '../components/Footer';
 
 const DownloadPage = () => {
   return (
@@ -13,7 +14,9 @@ const DownloadPage = () => {
       <GuideSection />
       <VideoGuide />
       <SupportSection />
+      <Footer />
     </div>
+
   );
 };
 

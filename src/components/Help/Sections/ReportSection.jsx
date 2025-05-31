@@ -66,7 +66,7 @@ const ReportSection = () => {
       
       // In a real implementation, we'd send this data to an endpoint
       console.log('Report submitted:', { 
-        to: 'nida.nidashahzad@gmail.com',
+        to: 'nida.shahzad0000@gmail.com',
         subject: `OSU Abuse Report: ${reportData.reportType}`,
         body: {
           reportedUser: reportData.username,
@@ -113,8 +113,8 @@ const ReportSection = () => {
 
   if (reportData.submitted) {
     return (
-      <div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-6 pb-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] [animation:bounceSlow_3s_ease-in-out_infinite]">
+      <div className="bg-gray-700 dark:bg-gray-900">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 pb-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] ">
           Report Abuse
         </h1>
         
@@ -149,7 +149,7 @@ const ReportSection = () => {
   }
 
   return (
-    <div>
+    <div div className="bg-gray-700 dark:bg-gray-900">
       <h1 className=" md:text-4xl  mb-6 pb-4 border-b border-gray-200 dark:border-gray-700 text-5xl font-extrabold bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] ">
         Report Abuse
       </h1>

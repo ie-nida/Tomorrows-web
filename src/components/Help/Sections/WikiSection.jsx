@@ -19,7 +19,7 @@ const WikiSection = ({ subSection }) => {
   }, [subSection]);
 
   return (
-    <div>
+    <div className="bg-gray-700 dark:bg-gray-900">
       {/* Main heading */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 pb-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)]">
         Osu Wiki
@@ -34,7 +34,7 @@ const WikiSection = ({ subSection }) => {
         
         <div className="my-6 rounded-xl overflow-hidden shadow-md">
           <HelpImage 
-            src="https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg" 
+            src="help.gif" 
             alt="Someone playing a rhythm game"
             className="w-full h-auto object-cover"
           />
@@ -97,7 +97,7 @@ const WikiSection = ({ subSection }) => {
               </p>
               <div className="aspect-video bg-gray-200 dark:bg-gray-600 rounded-md overflow-hidden">
                 <HelpImage 
-                  src="https://images.pexels.com/photos/2261/food-man-person-face.jpg" 
+                  src="helpstandard.gif" 
                   alt="osu! standard gameplay"
                   className="w-full h-full object-cover"
                 />
@@ -110,7 +110,7 @@ const WikiSection = ({ subSection }) => {
               </p>
               <div className="aspect-video bg-gray-200 dark:bg-gray-600 rounded-md overflow-hidden">
                 <HelpImage 
-                  src="https://images.pexels.com/photos/11697176/pexels-photo-11697176.jpeg" 
+                  src="helptaiko.gif" 
                   alt="osu!taiko gameplay"
                   className="w-full h-full object-cover"
                 />
@@ -123,7 +123,7 @@ const WikiSection = ({ subSection }) => {
               </p>
               <div className="aspect-video bg-gray-200 dark:bg-gray-600 rounded-md overflow-hidden">
                 <HelpImage 
-                  src="https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg" 
+                  src="helpcatch.gif" 
                   alt="osu!catch gameplay"
                   className="w-full h-full object-cover"
                 />
@@ -136,7 +136,7 @@ const WikiSection = ({ subSection }) => {
               </p>
               <div className="aspect-video bg-gray-200 dark:bg-gray-600 rounded-md overflow-hidden">
                 <HelpImage 
-                  src="https://images.pexels.com/photos/5082580/pexels-photo-5082580.jpeg" 
+                  src="helpmania.gif" 
                   alt="osu!mania gameplay"
                   className="w-full h-full object-cover"
                 />

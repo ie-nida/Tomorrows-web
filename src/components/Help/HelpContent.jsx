@@ -45,7 +45,10 @@ const HelpContent = ({ activeSection, searchQuery }) => {
       default:
         return <WikiSection subSection="" />;
     }
+
+
   };
+  
   
   return (
     <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-300 p-4 md:p-8">
@@ -57,6 +60,8 @@ const HelpContent = ({ activeSection, searchQuery }) => {
         {renderSection()}
       </div>
     </main>
+    
+    
   );
 };
 

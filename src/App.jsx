@@ -13,7 +13,12 @@ import Standard from "./components/Standard.jsx";
 import Catch from "./components/Catch.jsx";
 import Mania from "./components/Mania.jsx";
 import Help from "./Help.jsx";
-
+import { Toaster } from 'react-hot-toast';
+import WikiSection from "./components/Help/Sections/WikiSection.jsx";
+import FAQSection from "./components/Help/Sections/FAQSection.jsx";
+import RulesSection from "./components/Help/Sections/RulesSection.jsx";
+import ReportSection from "./components/Help/Sections/ReportSection.jsx";
+import NeedHelpSection from "./components/Help/Sections/NeedHelpSection.jsx";
 
 // Welcome Screen should navigate to LoadingPage after it completes
 function WelcomeScreenWithNavigate() {
@@ -44,6 +49,21 @@ function App() {
     <Router>
       <GlobalStyle />
       <CursorTrail />
+
+      
+
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#1f1f1f",
+            color: "#fff",
+            borderRadius: "12px",
+          },
+        }}
+      />
+      {/* Your app content */}
       
       {/* Temporarily remove Navbar to check if it's causing issues */}
       {/* <Navbar /> */}
@@ -81,6 +101,21 @@ function App() {
 
         {/* Route for Help */}
         <Route path="/help" element={<Help />} />
+
+        {/* Route for  Wiki */}
+        <Route path="/wiki" element={<WikiSection />} />
+
+        {/* Route for  FAQ */}
+        <Route path="/faq" element={<FAQSection />} />
+
+        {/* Route for  Rules */}
+        <Route path="/rules" element={<RulesSection />} />
+
+        {/* Route for  Report */}
+        <Route path="/reports" element={<ReportSection />} />
+
+        {/* Route for  Need Help */}
+        <Route path="/need" element={<NeedHelpSection />} />
 
       </Routes>
     </Router>

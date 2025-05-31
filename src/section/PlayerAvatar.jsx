@@ -44,9 +44,7 @@ const PlayerAvatar = ({ username, avatarUrl, rank }) => {
         />
       ) : (
         <div
-          className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold ${getColorClass(
-            username
-          )} ${isTopPlayer ? 'ring-2' : 'ring-1'} ${rankGlow()} shadow-lg`}
+          className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold ${getColorClass(username)} ${isTopPlayer ? 'ring-2' : 'ring-1'} ${rankGlow()} shadow-lg`}
         >
           {getInitials(username)}
         </div>

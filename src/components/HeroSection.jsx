@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Download } from 'lucide-react';
 
+
 const HeroSection = () => {
   const canvasRef = useRef(null);
 
@@ -106,7 +107,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center mt-32">
-        <h1 className="text-7xl font-extrabold bg-gradient-to-r from-[#450874] via-white to-pink-900 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] [animation:bounceSlow_3s_ease-in-out_infinite]">
+        <h1 className="text-5xl sm:text-3xl md:text-6xl lg:text-7xl  mx-auto sm:mx-0 font-extrabold bg-gradient-to-r from-[#450874] via-white to-pink-900 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] [animation:bounceSlow_3s_ease-in-out_infinite]">
           Download <span className="text-[#fefefe]">osu!</span>
           <br />
           <span className="text-3xl md:text-5xl lg:text-6xl">Rhythm is just a click away</span>

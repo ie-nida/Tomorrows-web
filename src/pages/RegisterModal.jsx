@@ -1,116 +1,170 @@
 import React, { useState } from "react";
+import { supabase } from "../../integration/supabase";
 import { motion } from "framer-motion";
-import { FaUser, FaLock } from "react-icons/fa";
-import ReCAPTCHA from "react-recaptcha";
+import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
-  const [isVerified, setIsVerified] = useState(false);  // Track verification status
+  // Use 'name' consistently, or rename to 'username' if you prefer
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleCaptchaChange = (value) => {
-    if (value) {
-      setIsVerified(true); // If CAPTCHA is solved, set verification to true
+  const handleRegister = async () => {
+    setError("");
+    if (!recaptchaValue) {
+      setError("Please confirm you are not a robot!");
+      return;
+    }
+
+    if (!name || !email || !password || !confirmPassword) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (signUpError) {
+        setError(signUpError.message || "Registration failed");
+        return;
+      }
+
+      // Insert into profiles table
+      const { error: profileError } = await supabase.from("profiles").insert([
+        {
+          id: signUpData.user.id,
+          name,
+          email,
+          avatar_url: "https://example.com/default-avatar.png",
+          password
+        },
+      ]);
+
+      if (profileError) {
+        setError("Error saving profile info");
+        return;
+      }
+
+      // On success, switch to sign-in modal
+      onSwitchToSignIn();
+    } catch (err) {
+      setError("Supabase error. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-transparent">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-black/30">
       <motion.div
         className="bg-[#2c2c2c]/50 text-white p-6 md:p-8 rounded-2xl w-[90%] max-w-2xl flex flex-col md:flex-row relative shadow-2xl backdrop-blur-sm"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.3 }}
       >
         {/* Form Section */}
         <div className="w-full md:w-2/3 md:pr-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-5 text-center md:text-left">
-            Register to Proceed
+            Create an Account
           </h2>
 
-          {/* Username Input */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-2 rounded-lg mb-4">
+              {error}
+            </div>
+          )}
+
           <div className="relative mb-4">
             <FaUser className="absolute left-3 top-3 text-gray-400" />
             <input
               type="text"
               placeholder="Username"
-              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
             />
           </div>
 
-          {/* Password Input */}
+          <div className="relative mb-4">
+            <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
+            />
+          </div>
+
           <div className="relative mb-4">
             <FaLock className="absolute left-3 top-3 text-gray-400" />
             <input
               type="password"
               placeholder="Password"
-              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
             />
           </div>
 
-          {/* Confirm Password Input */}
           <div className="relative mb-4">
             <FaLock className="absolute left-3 top-3 text-gray-400" />
             <input
               type="password"
               placeholder="Confirm Password"
-              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="pl-10 pr-3 py-2 w-full bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
             />
           </div>
 
-           {/* Cloudflare Verification Box */}
-           <div className="bg-[#1a1a1a] border border-gray-600 rounded p-3 mb-5 flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2 text-green-400 font-semibold">
-              <img src="/icons/success-check.png" alt="Success" className="w-4 h-4" />
-              Success!
-            </div>
-            <div className="text-right text-gray-400 text-xs">
-              <div>CLOUDFLARE</div>
-              <div>Privacy • Terms</div>
-            </div>
-          </div>
-
-          {/* reCAPTCHA Component */}
-          <div className="mb-5">
+          {/* reCAPTCHA */}
+          <div className="mb-5 overflow-hidden">
             <ReCAPTCHA
-              sitekey="your-site-key-here" // Use your actual reCAPTCHA site key
-              render="explicit"
-              verifyCallback={(response) => console.log(response)} // Handle the reCAPTCHA response
+              sitekey="6LfyfzUrAAAAANWR2HgQ7d2vF-ZzcpK-0hAezmCJ"
+              theme="dark"
+              onChange={(value) => {
+                setRecaptchaValue(value);
+                setError("");
+              }}
             />
           </div>
 
-          {/* Register Button with Sparkle Effect */}
-          <button
-            disabled={!isVerified}  // Disable if not verified
-            className={`${
-              isVerified ? "bg-green-500 hover:bg-green-600" : "bg-green-400"
-            } px-4 py-2 w-full rounded-lg mb-3 flex items-center justify-center gap-2 relative overflow-hidden`}
-          >
-            <span>Register✨</span>
-            {/* Sparkle Effect */}
-            {isVerified && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="sparkle animate-ping">✨</span>
-              </div>
-            )}
-          </button>
-
-          {/* CAPTCHA */}
-          <div className="mt-4">
-            <ReCAPTCHA
-              sitekey="YOUR_RECAPTCHA_SITE_KEY"  // Replace with your site key
-              onChange={handleCaptchaChange}
-            />
-          </div>
-
-          {/* Switch to Sign In Link */}
-          <p className="text-sm text-gray-300 mt-6 text-center">
-            Already have an account?{" "}
-            <span
+          <div className="text-yellow-400 text-sm mb-3">
+            <button
               onClick={onSwitchToSignIn}
-              className="text-yellow-400 hover:underline cursor-pointer font-semibold"
+              className="text-yellow-400 hover:underline cursor-pointer font-semibold bg-transparent border-none p-0 focus:outline-none"
+              type="button"
             >
-              Sign in here
-            </span>
-          </p>
+              Already have an account? Sign in here
+            </button>
+          </div>
+
+          <button
+            onClick={handleRegister}
+            disabled={isLoading}
+            className={`bg-green-500 hover:bg-green-600 px-4 py-2 w-full rounded-lg transition-colors duration-300 ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            {isLoading ? "Creating Account..." : "Create Account"}
+          </button>
         </div>
 
         {/* Side Video */}
@@ -127,7 +181,9 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-4 text-white text-3xl hover:text-red-400"
+          className="absolute top-3 right-4 text-white text-3xl hover:text-red-400 transition-colors duration-300"
+          aria-label="Close"
+          type="button"
         >
           ×
         </button>

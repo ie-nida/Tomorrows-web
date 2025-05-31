@@ -125,7 +125,7 @@ const OsuNewsPage = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#230715] to-[#360b20] min-h-screen text-white py-16 px-4">
+    <section className="xl:-mt-40 2xl:-mt-70 bg-gradient-to-b from-[#230715] to-[#360b20] min-h-screen text-white py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="-mt-10 inline-block text-5xl font-extrabold bg-gradient-to-r from-[#9a094a] via-[#fbaad1] to-white bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(198,36,110,0.7)]">
           Osu! News Hub

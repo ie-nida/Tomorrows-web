@@ -4,6 +4,7 @@ import StreamsContainer from './StreamsContainer';
 import Header from './Header';
 import { TwitchProvider } from '../context/TwitchContext';
 import NavBar from '../pages/Navbar';
+import Footer from './Footer';
 
 const Community = () => {
   return (
@@ -15,9 +16,7 @@ const Community = () => {
         <main className="container mx-auto px-4 py-8">
           <StreamsContainer />
         </main>
-        <footer className="bg-gray-800 py-4 text-center text-gray-400 text-sm">
-          <p>© 2025 OSU Community Streams • Not affiliated with osu! or Twitch</p>
-        </footer>
+        <Footer />
       </div>
     </TwitchProvider>
   );

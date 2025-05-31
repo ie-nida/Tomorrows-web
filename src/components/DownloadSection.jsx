@@ -156,6 +156,7 @@ const DownloadSection = () => {
         )}
       </section>
     </>
+    
   );
 };
 

@@ -1,8 +1,29 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaSignOutAlt } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const LogoutModal = ({ onClose, onConfirmLogout }) => {
+  const handleLogout = () => {
+    onConfirmLogout(); // your logout logic
+
+    toast.success("Logged out successfully!", {
+      style: {
+        background: "#1f1f1f", // blackish gray
+        color: "#ffffff",
+        borderRadius: "12px",
+        padding: "16px",
+        fontWeight: "500",
+      },
+      iconTheme: {
+        primary: "#22c55e", // green
+        secondary: "#1f1f1f",
+      },
+    });
+
+    onClose(); // close the modal
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-transparent">
       <motion.div
@@ -20,7 +41,7 @@ const LogoutModal = ({ onClose, onConfirmLogout }) => {
           </p>
           <div className="flex gap-4 justify-center">
             <button
-              onClick={onConfirmLogout}
+              onClick={handleLogout}
               className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg text-white font-semibold flex items-center gap-2"
             >
               <FaSignOutAlt />
