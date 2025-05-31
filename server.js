@@ -165,11 +165,13 @@ app.get("/api/auth/logout", (req, res) => {
 
 
 
-// Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+const HOST = '0.0.0.0'; // 🔥 Required by Render
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
+
 
 
 
