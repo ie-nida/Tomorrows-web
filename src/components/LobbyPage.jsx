@@ -8,12 +8,14 @@ import RegisterModal from "../pages/RegisterModal";
 import LogoutModal from "../pages/LogoutModal.JSX";
 import GameModesSection from "./GameModesSection";
 import Footer from "./Footer";
-import SocialMediaBar from "../components/SocialMediaBar.JSX"; // Adjust path if necessary
+import SocialMediaBar from "../components/SocialMediaBar.JSX";
+import DownloadPopup from "./DownloadPopup"; // Add the import for DownloadPopup
 
 const LobbyPage = () => {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // Add missing state
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -63,6 +65,12 @@ const LobbyPage = () => {
     }
   };
 
+  const handleDownload = () => {
+    // Add your download logic here
+    window.open('./download', '_blank');
+    setShowPopup(false);
+  };
+
   return (
     <div className="w-full min-h-screen">
       {/* Background Layers */}
@@ -84,9 +92,9 @@ const LobbyPage = () => {
 
           {/* Welcome Text */}
           <div className="absolute top-50 left-0 text-left text-white ml-10">
-          <h2 className="text-5xl 2xl:mt-20 sm:text-4xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl max-w-3xl mx-auto sm:mx-0 font-extrabold bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] [animation:bounceSlow_3s_ease-in-out_infinite] xl:whitespace-nowrap">
-          Welcome to osu!
-          </h2>
+            <h2 className="text-5xl 2xl:mt-20 sm:text-4xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl max-w-3xl mx-auto sm:mx-0 font-extrabold bg-gradient-to-r from-pink-800 via-white to-indigo-100 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(139,0,78,0.7)] [animation:bounceSlow_3s_ease-in-out_infinite] xl:whitespace-nowrap">
+              Welcome to osu!
+            </h2>
 
             <p
               className="mt-4 text-1xl sm:text-1xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-3xl mx-auto sm:mx-0 text-white max-w-2xl [animation:bounceSlow_3s_ease-in-out_infinite] [animation-delay:1s]"
@@ -96,8 +104,11 @@ const LobbyPage = () => {
               and rise through the global ranks with style.<br />
               Join a vibrant community and show the world your perfect score!
             </p>
-            <button className="mt-8 px-6 py-3 2xl:text-1xl bg-gradient-to-r from-pink-900 to-indigo-950 text-white rounded-lg hover:brightness-110 transition-all duration-300 shadow-lg">
-              Start Game
+            <button 
+              onClick={() => setShowPopup(true)}
+              className="mt-8 px-6 py-3 2xl:text-1xl bg-gradient-to-r from-pink-900 to-indigo-950 text-white rounded-lg hover:brightness-110 transition-all duration-300 shadow-lg
+              relative overflow-hidden group">
+              <span className="relative z-10">Start Game</span>
             </button>
           </div>
 
@@ -134,8 +145,8 @@ const LobbyPage = () => {
         </div>
          
         <div className="-mt-24 sm:-mt-1 md:-mt-1 lg:-mt-1">
-  <GameModesSection />
-</div>
+          <GameModesSection />
+        </div>
 
         <div className="w-full bg-black">
           <OsuNewsPage />
@@ -169,6 +180,13 @@ const LobbyPage = () => {
           onConfirmLogout={handleLogout}
         />
       )}
+      
+      {/* Download popup */}
+      <DownloadPopup 
+        isOpen={showPopup} 
+        onClose={() => setShowPopup(false)}
+        onDownload={handleDownload}
+      />
     </div>
   );
 };

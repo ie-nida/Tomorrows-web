@@ -19,6 +19,7 @@ import FAQSection from "./components/Help/Sections/FAQSection.jsx";
 import RulesSection from "./components/Help/Sections/RulesSection.jsx";
 import ReportSection from "./components/Help/Sections/ReportSection.jsx";
 import NeedHelpSection from "./components/Help/Sections/NeedHelpSection.jsx";
+import DownloadSection from "./components/DownloadSection.jsx";
 
 // Welcome Screen should navigate to LoadingPage after it completes
 function WelcomeScreenWithNavigate() {
@@ -116,6 +117,9 @@ function App() {
 
         {/* Route for  Need Help */}
         <Route path="/need" element={<NeedHelpSection />} />
+
+        {/* Route for  Download */}
+        <Route path="/download" element={<DownloadSection />} />
 
       </Routes>
     </Router>
