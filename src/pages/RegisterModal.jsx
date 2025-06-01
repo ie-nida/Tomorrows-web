@@ -134,17 +134,15 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
             />
           </div>
 
-          {/* reCAPTCHA */}
-          <div className="mb-5 overflow-hidden">
-            <ReCAPTCHA
-              sitekey="6LfyfzUrAAAAANWR2HgQ7d2vF-ZzcpK-0hAezmCJ"
-              theme="dark"
-              onChange={(value) => {
-                setRecaptchaValue(value);
-                setError("");
-              }}
-            />
-          </div>
+          <ReCAPTCHA
+  sitekey={import.meta.env.RECAPTCHA_SITE_KEY}
+  theme="dark"
+  onChange={(value) => {
+    setRecaptchaValue(value);
+    setError("");
+  }}
+/>
+
 
           <div className="text-yellow-400 text-sm mb-3">
             <button
