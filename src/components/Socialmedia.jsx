@@ -1,6 +1,6 @@
 import { FaTwitter, FaHeart } from "react-icons/fa";
 
-const SocialMediaBar = () => {
+const Socialmedia = () => {
   const icons = [
     { icon: <FaTwitter />, label: "Twitter", link: "https://twitter.com/osugame" },
     { icon: <FaHeart className="text-pink-500" />, label: "Support the game", link: "https://osu.ppy.sh/home/support" },
@@ -35,4 +35,4 @@ const SocialMediaBar = () => {
   );
 };
 
-export default SocialMediaBar;
+export default Socialmedia;

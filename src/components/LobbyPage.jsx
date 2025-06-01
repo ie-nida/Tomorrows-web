@@ -8,7 +8,7 @@ import RegisterModal from "../pages/RegisterModal";
 import LogoutModal from "../pages/LogoutModal.jsx";
 import GameModesSection from "./GameModesSection";
 import Footer from "./Footer";
-import SocialMediaBar from "../components/SocialMediaBar.JSX";
+import SocialMediaBar from "./Socialmedia";
 import DownloadPopup from "./DownloadPopup"; // Add the import for DownloadPopup
 
 const LobbyPage = () => {
