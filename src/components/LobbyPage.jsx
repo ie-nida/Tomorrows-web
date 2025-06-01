@@ -5,7 +5,7 @@ import OsuNewsPage from "../pages/OsuNewsPage";
 import GirlLogo from "../pages/GirlLogo";
 import SignInModal from "../pages/SignInModal";
 import RegisterModal from "../pages/RegisterModal";
-import LogoutModal from "../pages/LogoutModal.JSX";
+import LogoutModal from "../pages/LogoutModal.jsx";
 import GameModesSection from "./GameModesSection";
 import Footer from "./Footer";
 import SocialMediaBar from "../components/SocialMediaBar.JSX";
