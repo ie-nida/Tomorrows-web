@@ -3,9 +3,8 @@ import { AlertTriangle, Star } from 'lucide-react';
 import TaikoImage from './TaikoImage';
 
 
-// TypeScript interface for component props
 const MainContent = ({ isLoading, currentLanguage }) => {
-  // Content organized by language
+ 
   const contentByLanguage = {
     en: {
       heading: "osu!taiko",

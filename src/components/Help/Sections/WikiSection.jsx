@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import HelpImage from '../HelpImage';
 
 const WikiSection = ({ subSection }) => {
-  // Maps subsection IDs to their scroll targets
+  
   const scrollToTarget = () => {
     if (subSection && subSection !== '') {
       const element = document.getElementById(subSection);
@@ -13,7 +13,7 @@ const WikiSection = ({ subSection }) => {
     }
   };
 
-  // Scroll to subsection after render
+ 
   React.useEffect(() => {
     scrollToTarget();
   }, [subSection]);

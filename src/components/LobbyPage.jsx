@@ -9,13 +9,13 @@ import LogoutModal from "../pages/LogoutModal.jsx";
 import GameModesSection from "./GameModesSection";
 import Footer from "./Footer";
 import SocialMediaBar from "./Socialmedia";
-import DownloadPopup from "./DownloadPopup"; // Add the import for DownloadPopup
+import DownloadPopup from "./DownloadPopup"; 
 
 const LobbyPage = () => {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // Add missing state
+  const [showPopup, setShowPopup] = useState(false); 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const LobbyPage = () => {
   };
 
   const handleDownload = () => {
-    // Add your download logic here
+   
     window.open('./download', '_blank');
     setShowPopup(false);
   };

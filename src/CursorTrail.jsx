@@ -6,7 +6,7 @@ const CursorTrail = () => {
       const trail = document.createElement("div");
       trail.className = "cursor-trail";
 
-      // Offset to center the trail based on 16x16 hotspot
+      
       trail.style.left = `${e.clientX}px`;
       trail.style.top = `${e.clientY}px`;
 

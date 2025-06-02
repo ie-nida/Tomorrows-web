@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 function LoadingPage({ onStart }) {
   const [isHovered, setIsHovered] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState(""); // Track background image
-  const [showBackground, setShowBackground] = useState(false); // Control background fade
+  const [backgroundImage, setBackgroundImage] = useState(""); 
+  const [showBackground, setShowBackground] = useState(false); 
 
-  // Background images array
+ 
   const backgrounds = [
     "/images/osu_background_1.jpg",
     "/images/osu_background_2.jpg",
@@ -17,20 +17,20 @@ function LoadingPage({ onStart }) {
     "/images/osu_background_5.webp",
   ];
 
-  // Select a random background image
+
   useEffect(() => {
     const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
     setBackgroundImage(randomBackground);
 
-    // Fade in background
+    
     setTimeout(() => {
       setShowBackground(true);
     }, 100);
 
-    // Prevent scrollbar from appearing
+    
     document.body.style.overflow = "hidden";
 
-    // Clean up when component unmounts
+  
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -38,23 +38,23 @@ function LoadingPage({ onStart }) {
 
   const handleClick = () => {
     setFadeOut(true);
-    setTimeout(onStart, 1000); // Delay for fade-out effect
+    setTimeout(onStart, 1000); 
   };
 
-  // Dynamic background size based on screen width
+ 
   const getBackgroundScale = () => {
     const width = window.innerWidth;
-    if (width < 640) return 1.4;  // For small screens (mobile)
-    if (width < 768) return 1.2;  // For tablets
-    if (width < 1024) return 1.1; // For small laptops
-    return 1; // For larger screens (desktops)
+    if (width < 640) return 1.4; 
+    if (width < 768) return 1.2; 
+    if (width < 1024) return 1.1; 
+    return 1; 
   };
 
   return (
     <motion.div
       className="relative h-screen w-screen overflow-hidden flex items-center justify-center"
-      animate={{ opacity: fadeOut ? 0 : 1 }} // Fade out effect
-      transition={{ duration: 1 }} // Fade duration
+      animate={{ opacity: fadeOut ? 0 : 1 }} 
+      transition={{ duration: 1 }} 
     >
       {/* Background Image */}
       <AnimatePresence>
@@ -88,7 +88,7 @@ function LoadingPage({ onStart }) {
           backgroundSize: "contain",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.8, // Make circle a bit more faint
+          opacity: 0.8, 
         }}
         animate={{
           scale: isHovered ? [1.2, 1.3, 1.25, 1.2] : [1, 1.08, 1.04, 1],

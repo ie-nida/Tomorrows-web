@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertTriangle, CheckCircle, Info } from 'lucide-react';
 
 const RulesSection = ({ subSection }) => {
-  // Maps subsection IDs to their scroll targets
+ 
   const scrollToTarget = () => {
     if (subSection && subSection !== '') {
       const element = document.getElementById(`rules-${subSection}`);
@@ -12,7 +12,7 @@ const RulesSection = ({ subSection }) => {
     }
   };
 
-  // Scroll to subsection after render
+  
   React.useEffect(() => {
     scrollToTarget();
   }, [subSection]);

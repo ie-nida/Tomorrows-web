@@ -21,24 +21,23 @@ import ReportSection from "./components/Help/Sections/ReportSection.jsx";
 import NeedHelpSection from "./components/Help/Sections/NeedHelpSection.jsx";
 import DownloadSection from "./components/DownloadSection.jsx";
 
-// Welcome Screen should navigate to LoadingPage after it completes
 function WelcomeScreenWithNavigate() {
   const navigate = useNavigate();
 
   const handleCompleteWelcome = () => {
-    // Navigate to the loading page after the welcome screen
+  
     navigate("/loading");
   };
 
   return <WelcomeScreen onComplete={handleCompleteWelcome} />;
 }
 
-// Loading Page should navigate to LobbyPage once the game starts
+
 function LoadingPageWithNavigate() {
   const navigate = useNavigate();
 
   const handleStartGame = () => {
-    // Navigate to the lobby page after loading is done
+    
     navigate("/lobby");
   };
 
@@ -64,9 +63,9 @@ function App() {
           },
         }}
       />
-      {/* Your app content */}
+     
       
-      {/* Temporarily remove Navbar to check if it's causing issues */}
+     
       {/* <Navbar /> */}
 
       <Routes>

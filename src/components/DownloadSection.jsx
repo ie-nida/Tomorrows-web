@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { downloadOptions } from '../data/constants'; // Assuming constants file is correct
+import { downloadOptions } from '../data/constants'; 
 import DownloadButton from './DownloadButton';
 import { Download, Monitor, Laptop, CheckCircle } from 'lucide-react';
 import NavBar from "../pages/Navbar";

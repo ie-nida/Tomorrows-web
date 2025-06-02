@@ -74,7 +74,7 @@ const Footer = () => {
   );
 };
 
-// Reusable Components
+
 const SocialLink = ({ icon, href, label }) => (
   <a
     href={href}

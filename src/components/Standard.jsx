@@ -18,7 +18,7 @@ function Standard() {
 
     setIsLoading(true);
     try {
-      // Simulate loading
+      
       await new Promise(resolve => setTimeout(resolve, 1000));
       setCurrentLanguage(lang);
       setIsLoading(false);

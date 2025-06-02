@@ -5,23 +5,23 @@ import toast from "react-hot-toast";
 
 const LogoutModal = ({ onClose, onConfirmLogout }) => {
   const handleLogout = () => {
-    onConfirmLogout(); // your logout logic
+    onConfirmLogout(); 
 
     toast.success("Logged out successfully!", {
       style: {
-        background: "#1f1f1f", // blackish gray
+        background: "#1f1f1f", 
         color: "#ffffff",
         borderRadius: "12px",
         padding: "16px",
         fontWeight: "500",
       },
       iconTheme: {
-        primary: "#22c55e", // green
+        primary: "#22c55e", 
         secondary: "#1f1f1f",
       },
     });
 
-    onClose(); // close the modal
+    onClose(); 
   };
 
   return (

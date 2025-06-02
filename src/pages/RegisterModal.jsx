@@ -5,7 +5,7 @@ import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
-  // Use 'name' consistently, or rename to 'username' if you prefer
+ 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +35,7 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
       setIsLoading(true);
 
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        name,
         email,
         password,
       });
@@ -44,7 +45,6 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
         return;
       }
 
-      // Insert into profiles table
       const { error: profileError } = await supabase.from("profiles").insert([
         {
           id: signUpData.user.id,
@@ -60,7 +60,7 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
         return;
       }
 
-      // On success, switch to sign-in modal
+      
       onSwitchToSignIn();
     } catch (err) {
       setError("Supabase error. Please try again later.");
@@ -134,15 +134,17 @@ const RegisterModal = ({ onClose, onSwitchToSignIn }) => {
             />
           </div>
 
-          <ReCAPTCHA
-  sitekey={import.meta.env.RECAPTCHA_SITE_KEY}
-  theme="dark"
-  onChange={(value) => {
-    setRecaptchaValue(value);
-    setError("");
-  }}
-/>
-
+          {/* reCAPTCHA */}
+          <div className="mb-5 overflow-hidden">
+            <ReCAPTCHA
+              sitekey="6LfyfzUrAAAAANWR2HgQ7d2vF-ZzcpK-0hAezmCJ"
+              theme="dark"
+              onChange={(value) => {
+                setRecaptchaValue(value);
+                setError("");
+              }}
+            />
+          </div>
 
           <div className="text-yellow-400 text-sm mb-3">
             <button

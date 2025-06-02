@@ -31,12 +31,12 @@ const HeroSection = () => {
         radius,
         color: colors[Math.floor(Math.random() * colors.length)],
         velocity: {
-          x: (Math.random() - 0.5) * 2.5, // Faster movement
+          x: (Math.random() - 0.5) * 2.5, 
           y: (Math.random() - 0.5) * 2.5,
         },
         alpha: Math.random() * 0.3 + 0.2,
         decreasing: Math.random() > 0.5,
-        pulseOffset: Math.random() * Math.PI * 2, // Unique pulse phase
+        pulseOffset: Math.random() * Math.PI * 2, 
       });
     }
 
@@ -71,13 +71,13 @@ const HeroSection = () => {
         ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
         ctx.fillStyle = circle.color + Math.floor(circle.alpha * 255).toString(16).padStart(2, '0');
 
-        // Glow
+      
         ctx.shadowColor = circle.color;
         ctx.shadowBlur = 20;
 
         ctx.fill();
 
-        // Reset shadow to avoid affecting other elements
+        
         ctx.shadowBlur = 0;
         ctx.shadowColor = 'transparent';
       });

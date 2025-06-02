@@ -30,7 +30,7 @@ const FAQItem = ({ question, answer }) => {
 };
 
 const FAQSection = ({ subSection }) => {
-  // Maps subsection IDs to their scroll targets
+  
   const scrollToTarget = () => {
     if (subSection && subSection !== '') {
       const element = document.getElementById(`faq-${subSection}`);
@@ -40,12 +40,12 @@ const FAQSection = ({ subSection }) => {
     }
   };
 
-  // Scroll to subsection after render
+  
   React.useEffect(() => {
     scrollToTarget();
   }, [subSection]);
   
-  // Account FAQ items
+  
   const accountFAQs = [
     {
       question: "How do I create an OSU account?",

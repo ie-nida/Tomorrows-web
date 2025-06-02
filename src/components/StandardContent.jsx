@@ -2,7 +2,7 @@ import React from 'react';
 import StandardImage from './StandardImage';
 
 const StandardContent = ({ isLoading, currentLanguage }) => {
-  // Content organized by language
+ 
   const contentByLanguage = {
     en: {
       heading: "osu!standard",

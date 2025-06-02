@@ -3,7 +3,7 @@ import { Star } from 'lucide-react';
 import ManiaImage from './ManiaImage';
 
 const ManiaMainContent = ({ isLoading, currentLanguage }) => {
-  // Content organized by language
+ 
   const contentByLanguage = {
     en: {
       heading: "osu!mania",

@@ -13,7 +13,7 @@ const GuideSection = () => {
     setActiveStep(prev => (prev === 0 ? installationSteps.length - 1 : prev - 1));
   };
   
-  // Auto advance every 7 seconds
+  
   useEffect(() => {
     const interval = setInterval(() => {
       nextStep();

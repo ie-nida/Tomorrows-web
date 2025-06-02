@@ -3,19 +3,19 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function WelcomeScreen() {
-  const navigate = useNavigate(); // Use useNavigate for navigation
+  const navigate = useNavigate(); 
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Set a timeout to trigger the fade out and navigate after 3 seconds
+    
     const timer = setTimeout(() => {
       setFadeOut(true);
       setTimeout(() => {
-        navigate("/loading"); // Automatically navigate to the loading page
-      }, 1000); // Fade-out duration
-    }, 3000); // Welcome stays for 3 seconds
+        navigate("/loading"); 
+      }, 1000); 
+    }, 3000); 
 
-    // Cleanup the timeout when the component unmounts
+    
     return () => clearTimeout(timer);
   }, [navigate]);
 

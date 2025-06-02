@@ -25,7 +25,7 @@ function Help() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Search implementation would go here
+    
     console.log('Searching for:', searchQuery);
   };
 

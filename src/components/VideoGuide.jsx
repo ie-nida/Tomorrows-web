@@ -46,7 +46,7 @@ const VideoGuide = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-[#0A0A14]">
-            {/* Video thumbnail overlay (before play) */}
+            {/* Video thumbnail overlay */}
             <div className={`absolute inset-0 transition-opacity duration-300 ${mainVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
               <div
                 className="absolute inset-0 bg-cover bg-center"

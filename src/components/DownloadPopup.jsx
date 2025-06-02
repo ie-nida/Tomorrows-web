@@ -48,7 +48,7 @@ const DownloadPopup = ({
         <div className="mb-4 flex justify-center">
   <div className="h-24 w-24 rounded-full flex items-center justify-center shadow-lg p-1">
     <img
-      src="./Osu-Logo.png" // <-- update this path
+      src="./Osu-Logo.png" 
       alt="osu!"
       className="h-full w-full rounded-full object-cover"
     />

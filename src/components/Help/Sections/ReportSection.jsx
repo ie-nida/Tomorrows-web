@@ -35,7 +35,7 @@ const ReportSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Basic validation
+   
     if (!reportData.username || !reportData.email || !reportData.reportType || !reportData.description) {
       setReportData({
         ...reportData,
@@ -44,7 +44,7 @@ const ReportSection = () => {
       return;
     }
 
-    // Email validation
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(reportData.email)) {
       setReportData({
@@ -61,10 +61,10 @@ const ReportSection = () => {
     });
 
     try {
-      // Simulate API call - in a real app, this would send data to a server
+     
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // In a real implementation, we'd send this data to an endpoint
+      
       console.log('Report submitted:', { 
         to: 'nida.shahzad0000@gmail.com',
         subject: `OSU Abuse Report: ${reportData.reportType}`,
@@ -80,7 +80,7 @@ const ReportSection = () => {
         }
       });
       
-      // Show success state
+      
       setReportData({
         ...reportData,
         submitted: true,

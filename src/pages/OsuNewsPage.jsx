@@ -19,7 +19,7 @@ const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
     } catch (error) {
       lastError = error;
       if (i < maxRetries - 1) {
-        await wait(Math.pow(2, i) * 1000); // Exponential backoff
+        await wait(Math.pow(2, i) * 1000); 
       }
     }
   }

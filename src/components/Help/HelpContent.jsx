@@ -9,10 +9,10 @@ const HelpContent = ({ activeSection, searchQuery }) => {
   const [fadeIn, setFadeIn] = useState(false);
   
   useEffect(() => {
-    // Reset fade state when section changes
+    
     setFadeIn(false);
     
-    // Trigger fade in after a tiny delay
+    
     const timer = setTimeout(() => {
       setFadeIn(true);
     }, 50);
@@ -21,22 +21,22 @@ const HelpContent = ({ activeSection, searchQuery }) => {
   }, [activeSection]);
   
   const renderSection = () => {
-    // Handle wiki sections
+    
     if (activeSection === 'wiki' || activeSection.startsWith('wiki-')) {
       return <WikiSection subSection={activeSection.replace('wiki-', '')} />;
     }
     
-    // Handle FAQ sections
+    
     if (activeSection === 'faq' || activeSection.startsWith('faq-')) {
       return <FAQSection subSection={activeSection.replace('faq-', '')} />;
     }
     
-    // Handle rules sections
+   
     if (activeSection === 'rules' || activeSection.startsWith('rules-')) {
       return <RulesSection subSection={activeSection.replace('rules-', '')} />;
     }
     
-    // Other main sections
+    
     switch (activeSection) {
       case 'report':
         return <ReportSection />;

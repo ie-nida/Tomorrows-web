@@ -9,7 +9,7 @@ const CountryFlag = ({ countryCode, className = "" }) => {
       alt={`${countryCode} flag`} 
       className={`w-4 h-3 rounded-sm object-cover shadow-sm ${className}`}
       onError={(e) => {
-        // Fallback to a default flag if the country code is invalid
+        
         e.target.src = "https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg";
       }}
     />

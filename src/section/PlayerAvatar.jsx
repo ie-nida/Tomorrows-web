@@ -1,12 +1,12 @@
 import React from 'react';
 
 const PlayerAvatar = ({ username, avatarUrl, rank }) => {
-  // Create a placeholder based on username if no avatar URL exists
+  
   const getInitials = (name) => {
     return name.charAt(0).toUpperCase();
   };
 
-  // Get a deterministic color based on the username
+ 
   const getColorClass = (username) => {
     const colors = [
       'bg-pink-700',

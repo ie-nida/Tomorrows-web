@@ -11,7 +11,7 @@ const OsuDailyLeaderboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedRows, setExpandedRows] = useState({});
   
-  // Adjust rows per page based on screen size
+  
   useEffect(() => {
     function handleResize() {
       setRowsPerPage(getRowsPerPageByScreenSize());
@@ -37,7 +37,7 @@ const OsuDailyLeaderboard = () => {
   
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    setExpandedRows({}); // Reset expanded rows when changing pages
+    setExpandedRows({}); 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   

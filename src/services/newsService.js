@@ -5,12 +5,10 @@ import { fallbackPosts } from '../data/fallbackData';
 const REDDIT_SUBREDDIT = 'osugame';
 const REDDIT_LIMIT = 3; // Changed from 10 to 3
 
-/**
- * Fetches posts from Reddit's r/osugame subreddit
- */
+
 export const fetchRedditPosts = async () => {
   try {
-    // Using Reddit's JSON API (no authentication required for public data)
+    
     const response = await fetch(
       `https://www.reddit.com/r/${REDDIT_SUBREDDIT}/hot.json?limit=${REDDIT_LIMIT}`
     );
@@ -23,19 +21,19 @@ export const fetchRedditPosts = async () => {
     const posts = data.data.children;
     
     return posts
-      .filter((post) => !post.data.stickied) // Filter out stickied posts
-      .slice(0, 3) // Ensure we only return 3 posts even after filtering
+      .filter((post) => !post.data.stickied) 
+      .slice(0, 3) 
       .map((post) => {
-        // Get the best image from the post
+        
         let imageUrl = null;
         if (post.data.preview && post.data.preview.images[0]) {
-          // Reddit encodes HTML entities in URLs, so we need to decode them
+          
           imageUrl = post.data.preview.images[0].source.url.replace(/&amp;/g, '&');
         } else if (post.data.thumbnail && post.data.thumbnail !== 'self' && post.data.thumbnail !== 'default') {
           imageUrl = post.data.thumbnail;
         }
         
-        // Format date as relative time
+        
         const createdDate = new Date(post.data.created_utc * 1000);
         const relativeTime = formatDistanceToNow(createdDate);
         
@@ -54,9 +52,7 @@ export const fetchRedditPosts = async () => {
   }
 };
 
-/**
- * Fetches posts from osu! official news
- */
+
 export const fetchOsuPosts = async () => {
   try {
     const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/news-proxy/osu`, {
@@ -76,9 +72,7 @@ export const fetchOsuPosts = async () => {
   }
 };
 
-/**
- * Fetches posts from Twitter (X) related to osu!
- */
+
 export const fetchTwitterPosts = async () => {
   try {
     const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/news-proxy/twitter`, {

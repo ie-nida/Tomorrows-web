@@ -3,7 +3,7 @@ import { AlertTriangle, Star } from 'lucide-react';
 import CatchImage from './CatchImage';
 
 const CatchMainContent = ({ isLoading, currentLanguage }) => {
-  // Content organized by language
+  
   const contentByLanguage = {
     en: {
       heading: "osu!catch",

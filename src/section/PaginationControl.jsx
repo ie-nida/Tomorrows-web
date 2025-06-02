@@ -1,11 +1,11 @@
 import React from 'react';
 
 const PaginationControl = ({ currentPage, totalPages, onPageChange }) => {
-  // Generate page numbers to display with ellipsis for large page counts
+  
   const getPageNumbers = () => {
     const pages = [];
     
-    pages.push(1); // Always show first page
+    pages.push(1); 
     
     const rangeStart = Math.max(2, currentPage - 1);
     const rangeEnd = Math.min(totalPages - 1, currentPage + 1);
@@ -23,7 +23,7 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange }) => {
     }
     
     if (totalPages > 1) {
-      pages.push(totalPages); // Always show last page
+      pages.push(totalPages); 
     }
     
     return pages;

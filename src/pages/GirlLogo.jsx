@@ -7,7 +7,7 @@ const GirlLogo = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    // Hide on sm and md, show on lg+
+    
     <div className="hidden md:hidden lg:flex absolute bottom-0 right-7 z-20 items-end">
       {/* Girl Image */}
       <div className="animate-[slideUp_1.5s_ease-out_forwards]" style={{ marginRight: "-50px" }}>

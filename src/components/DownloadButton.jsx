@@ -12,7 +12,7 @@ const DownloadButton = ({
   
   const handleClick = () => {
     if (onClick) onClick();
-    // Would normally handle the download here
+    
     window.open(url, '_blank');
   };
   
